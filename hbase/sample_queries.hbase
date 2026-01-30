@@ -1,0 +1,49 @@
+# Step 1: HOW TO START HBASE
+docker run -d --name hbase-ecommerce `
+  -p 2181:2181 `
+  -p 16010:16010 `
+  -p 9090:9090 `
+  harisekhon/hbase
+
+
+# Step 2: Open HBase Shell inside the container
+
+docker exec -it hbase-ecommerce hbase shell
+
+# Step 3: Create sessions table:
+
+create 'sessions',
+  'meta', 'geo', 'device', 'stats', 'events'
+
+
+# Step 4: Start HBase Thrift service (so Python can insert rows)
+
+docker exec -d hbase-ecommerce bash -lc "nohup hbase thrift start -p 9090 --infoport 9095 >/tmp/thrift.log 2>&1 &"
+
+
+## Queries
+# Query 1: List all running Docker containers
+docker ps
+
+# Query 2: Launch the HBase Shell within the Dockerized HBase container
+docker exec -it hbase-ecommerce hbase shell
+
+# Query 3: List tables
+list
+
+# Query 4: Verify a small sample of data from the "sessions" table
+scan 'sessions', { LIMIT => 5 }
+
+# Query 5: Retrieve sessions for a specific user using a column filter
+scan 'sessions', {
+  FILTER => "SingleColumnValueFilter('meta','user_id',=,'binary:user_001589')",
+  LIMIT => 10
+}
+
+# Retrieve 20 recent sessions based on time
+scan 'sessions', {
+  COLUMNS => ['meta:timestamp', 'meta:user_id'],
+  LIMIT => 20
+}
+
+
