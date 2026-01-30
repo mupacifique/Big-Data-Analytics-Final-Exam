@@ -20,3 +20,8 @@ outputs/
 
 # ===== Logs =====
 *.log
+
+# Spark / Big Data generated files
+analytics/outputs/
+outputs/
+*.parquet
