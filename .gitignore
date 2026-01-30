@@ -1,0 +1,22 @@
+# ===== OS files =====
+.DS_Store
+Thumbs.db
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+
+# ===== Virtual environments =====
+venv/
+.env
+
+# ===== Big Data / Large files =====
+data/raw/*.json
+
+# Spark / analytics outputs (optional but recommended)
+analytics/outputs/
+outputs/
+
+# ===== Logs =====
+*.log
