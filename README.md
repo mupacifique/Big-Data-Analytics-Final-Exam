@@ -30,8 +30,8 @@ Generates analytical outputs, dashboards, and business insights.
 
 ### Project Structure
 
+```text
 project-root/
-│
 ├── data/
 │   └── raw/
 │       ├── users.json
@@ -56,6 +56,7 @@ project-root/
 │
 ├── dataset_generator.py
 ├── README.md
+│
 └── report/
     └── Final Exam Project_Big Data Analytics Report.pdf
 
